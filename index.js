@@ -9,7 +9,7 @@ app.get("/", function(req, res){
     res.render("page");
 });
 
-app.listen(port);
+var io = require('socket.io').listen(app.listen(port));
 console.log("Listening on port " + port);
 
-
+app.use(express.static(__dirname + '/public'));
