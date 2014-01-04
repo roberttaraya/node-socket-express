@@ -16,18 +16,27 @@ window.onload = function() {
                 html += messages[i].message + '<br />';
             }
             content.innerHTML = html;
+            content.scrollTop = content.scrollHeight;
         } else {
             console.log("There is a problem:", data);
         }
     });
 
-    sendButton.onclick = function() {
+    var sendMessage = function(){
         if(name.value == "") {
             alert("Please type your name!");
         } else {
             var text = field.value;
             socket.emit('send', { message: text, username: name.value });
+            field.value = "";
         }
-    };
+    }
+
+    sendButton.addEventListener("click", sendMessage)
+    field.addEventListener("keyup", function(){
+        if (event.keyCode === 13){
+            sendMessage()
+        }
+    })
 
 }
