@@ -22,7 +22,7 @@ window.onload = function() {
         }
     });
 
-    sendButton.onclick = function() {
+    var sendMessage = function(){
         if(name.value == "") {
             alert("Please type your name!");
         } else {
@@ -30,6 +30,13 @@ window.onload = function() {
             socket.emit('send', { message: text, username: name.value });
             field.value = "";
         }
-    };
+    }
+
+    sendButton.addEventListener("click", sendMessage)
+    field.addEventListener("keyup", function(){
+        if (event.keyCode === 13){
+            sendMessage()
+        }
+    })
 
 }
